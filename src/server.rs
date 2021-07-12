@@ -92,8 +92,8 @@ fn process<'a>(hitokoto: &'a Hitokoto, req: httparse::Request) -> OutputEnum<'a>
 }
 
 pub fn handle_client(hitokoto: &Hitokoto, mut stream: TcpStream) {
-    let mut buffer = [0; 2048];
-    let mut headers = [httparse::EMPTY_HEADER; 16];
+    let mut buffer = [0; 4096];
+    let mut headers = [httparse::EMPTY_HEADER; 64];
     stream.read(&mut buffer).unwrap();
     let mut req = httparse::Request::new(&mut headers);
     match req.parse(&buffer) {
